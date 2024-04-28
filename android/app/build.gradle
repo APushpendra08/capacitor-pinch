@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     namespace "io.ionic.starter"
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildFeatures {
+       buildConfig true
+    }
     defaultConfig {
         applicationId "io.ionic.starter"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -40,6 +43,10 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+    implementation("com.moengage:moe-android-sdk:12.10.04")
+    implementation("androidx.core:core:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.lifecycle:lifecycle-process:2.5.1")
 }
 
 apply from: 'capacitor.build.gradle'
