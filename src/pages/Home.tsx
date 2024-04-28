@@ -13,6 +13,7 @@ import {
   useIonViewWillEnter
 } from '@ionic/react';
 import './Home.css';
+import { MoECapacitorCore } from 'capacitor-moengage-core';
 
 const Home: React.FC = () => {
 
@@ -20,7 +21,11 @@ const Home: React.FC = () => {
 
   useIonViewWillEnter(() => {
     const msgs = getMessages();
+    console.log(msgs)
     setMessages(msgs);
+    console.log('MoE ionViewWillEnter event fired 2');
+    MoECapacitorCore.initialize({ appId: "8SIW681S80Z08KSHQFSTIZ8T" })
+    MoECapacitorCore.trackEvent({ eventName:"Alan", appId:"8SIW681S80Z08KSHQFSTIZ8T"})
   });
 
   const refresh = (e: CustomEvent) => {

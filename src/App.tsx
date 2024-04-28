@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { IonApp, IonRouterOutlet, setupIonicReact, useIonViewWillEnter } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import ViewMessage from './pages/ViewMessage';
@@ -34,10 +34,22 @@ import '@ionic/react/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import { MoECapacitorCore, MoEProperties} from 'capacitor-moengage-core'
+
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
+const App: React.FC = () => {
+
+  useIonViewWillEnter(() => {
+    console.log('MoE ionViewWillEnter event fired');
+    MoECapacitorCore.initialize({ appId: "8SIW681S80Z08KSHQFSTIZ8T" })
+    MoECapacitorCore.trackEvent({ eventName:"Alan", appId:"8SIW681S80Z08KSHQFSTIZ8T"})
+  });
+
+  console.log("Mime data")
+  
+
+  return (<IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/" exact={true}>
@@ -52,6 +64,7 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+  )
+};
 
 export default App;
